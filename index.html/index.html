@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscrição Acampa 2025</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      background: url(floresta.jpg) no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+    .container {
+      width: 90%;
+      max-width: 700px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    img.logo {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 30px;
+      margin-bottom: 30px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button, input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    button {
+      background: #ffffff;
+      color: #271404;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .hidden { display: none; }
+    footer {
+      margin-top: 20px;
+      text-align: center;
+    }
+    footer img {
+      width: 200px;
+    }
+    .button-wpp {
+      margin-top: 10px;
+      background-color: #25D366;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="pagina1">
+    <img src="banner.jpg" alt="Logo" class="logo">
+    <p><h2>VOCÊ ESTÁ PRESTES A INICIAR A SUA INSCRIÇÃO PARA O ACAMPAMENTO 2025.</h2> 
+      <br>
+      <br><h2>CLIQUE EM "COMEÇAR" PARA INICIAR A SUA INSCRIÇÃO</h2>.</p>
+    <button onclick="irParaPagina2()"><h3>COMEÇAR</h3></button>
+  </div>
+
+  <div class="container hidden" id="pagina2">
+    <img src="banner.jpg" alt="Logo" class="logo">
+    <h1>INSCRIÇÃO ACAMPA 2025 ÁREA 300</h1>
+    <h3>INSCRIÇÃO PARA O ACAMPAMENTO ÁREA 300</h3>
+    <br>
+    <form id="formInscricao">
+      <input type="text" id="nome" placeholder="Nome" required>
+      <input type="number" id="idade" placeholder="Idade" required>
+      <input type="text" id="contato" placeholder="Número para contato" required>
+      <input type="text" id="equipe" placeholder="Nome da sua equipe" required>
+      <input type="text" id="deficiencia" placeholder="Possui alguma deficiência física ou alergia?" required>
+      <input type="text" id="responsavel" placeholder="Nome do seu responsável" required>
+      <input type="text" id="number" placeholder="Número do seu responsável" required>
+      <p style="margin-top: 15px;"><strong><h3>Se preferir, pode optar em comprar o ingresso pelo valor de 210 já com a camisa inclusa.</h3></strong></p>
+      <div style="margin-top: 10px; text-align: center;">
+        <label><input type="checkbox" id="consentimento"> <b>Estou ciente de que preciso pagar o ingresso de R$ 175</b></label>
+      </div>
+      <button type="submit"><b>ENVIAR SUA INSCRIÇÃO</b></button>
+    </form>
+    <footer>
+      <img src="project_20250404_2353155-01.png" alt="Logo Rodapé">
+      <p><H3>PIX: kingdomoficial300@gmail.com</H3></p>
+      <button class="button-wpp" onclick="window.open('https://wa.me/5592996257968','_blank')"><b>ENVIAR COMPROVANTE PARA O LÍDER RHAYAN</b></button>
+    </footer>
+  </div>
+
+  <div class="container hidden" id="pagina3">
+    <img src="banner.jpg" alt="Logo" class="logo">
+    <h2 id="msgFinal"></h2>
+    <br>
+    <p><h2>Agora tire um print e marque a gente nas redes sociais: @kingdomoficial_</h2></p>
+    <button onclick="voltarInicio()">Voltar para o início</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("qjQBWymkQs1RmCLgt");
+
+    function irParaPagina2() {
+      document.getElementById('pagina1').classList.add('hidden');
+      document.getElementById('pagina2').classList.remove('hidden');
+    }
+
+    function voltarInicio() {
+      location.reload();
+    }
+
+    function voltarInscricao() {
+      document.getElementById('pagina3').classList.add('hidden');
+      document.getElementById('pagina2').classList.remove('hidden');
+    }
+
+    document.getElementById("formInscricao").addEventListener("submit", function(event) {
+      event.preventDefault();
+      if (!document.getElementById("consentimento").checked) {
+        alert("Você precisa aceitar o consentimento para continuar.");
+        return;
+      }
+
+      const nome = document.getElementById("nome").value;
+      const templateParams = {
+        nome: nome,
+        idade: document.getElementById("idade").value,
+        contato: document.getElementById("contato").value,
+        equipe: document.getElementById("equipe").value,
+        deficiencia: document.getElementById("deficiencia").value,
+        responsavel: document.getElementById("responsavel").value,
+        number: document.getElementById("number").value
+      };
+
+      emailjs.send('service_rj9azi4', 'template_2ttnh0i', templateParams)
+        .then(() => {
+          document.getElementById('pagina2').classList.add('hidden');
+          document.getElementById('pagina3').classList.remove('hidden');
+
+          const genero = nome.toLowerCase().endsWith("a") ? "preparada" : "preparado";
+          document.getElementById("msgFinal").innerHTML = `AEEE!, <strong>${nome}</strong> ,SUA INSCRIÇÃO PRO ACAMPAMENTO 2025 TÁ CONFIRMADA E A GENTE TÁ MUITO FELIZ EM TER VOCÊ COM A GENTE NESSA JORNADA INCRÍVEL!`;
+        }, (error) => {
+          alert("Erro ao enviar inscrição: " + error.text);
+        });
+    });
+  </script>
+</body>
+</html>
